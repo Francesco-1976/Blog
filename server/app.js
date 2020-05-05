@@ -12,7 +12,7 @@ app.use((req, res, next) => {
     "Origin,X-Requestes-With,Content-Type,Accept,Authorization"
   );
 
-  res.setHeader("Access-Control-Allow-Methods", "GET");
+  res.setHeader("Access-Control-Allow-Methods", "GET", "POST");
   next();
 });
 
@@ -32,7 +32,7 @@ const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    app.listen(5000);
+    app.listen(process.env.PORT || 5000);
   })
   .catch((err) => {
     console.log(err);
